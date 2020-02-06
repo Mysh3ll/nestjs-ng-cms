@@ -28,7 +28,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/sticky-footer-navbar.scss",
+              "src/bootstrap.min.css"
             ],
             "scripts": []
           },
