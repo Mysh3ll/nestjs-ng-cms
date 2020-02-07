@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 import { Article } from '../models/article';
 
@@ -10,7 +11,7 @@ export class ArticlesService {
 
   constructor(private readonly httpClient: HttpClient) { }
 
-  findAllArticles() {
+  findAllArticles(): Observable<Article[]> {
     return this.httpClient.get<Article[]>('http://localhost:3000/articles');
   }
 }

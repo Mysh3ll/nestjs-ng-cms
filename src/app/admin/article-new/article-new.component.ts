@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EMPTY } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
 import { ArticleService } from '../article.service';
 
 @Component({
@@ -9,6 +12,7 @@ import { ArticleService } from '../article.service';
 })
 export class ArticleNewComponent implements OnInit {
   response$ = null;
+  error = null;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -17,8 +21,9 @@ export class ArticleNewComponent implements OnInit {
   }
 
   articleForm: FormGroup = this.formBuilder.group({
-    title: [''],
-    content: [''],
+    title: ['', Validators.required],
+    content: ['', [Validators.required, Validators.minLength(5)]],
+    creationDate: new Date().toISOString(),
   });
 
   ngOnInit() {
@@ -28,9 +33,18 @@ export class ArticleNewComponent implements OnInit {
     console.log('article / submit', this.articleForm.value);
     this.response$ = await this.articleService
       .createArticle(this.articleForm.value)
-      .subscribe(
-        res => console.log(res)
-      );
+      .pipe(
+        catchError(error => this.error = error)
+      )
+      .subscribe(res => EMPTY);
+  }
+
+  get title() {
+    return this.articleForm.get('title');
+  }
+
+  get content() {
+    return this.articleForm.get('content');
   }
 
 }
