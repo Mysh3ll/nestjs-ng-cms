@@ -13,7 +13,14 @@ export class ArticlesComponent implements OnInit {
   constructor(private readonly articlesService: ArticlesService) { }
 
   async ngOnInit() {
-    this.articles$ = await this.articlesService.findAllArticles();
+    this.findAllArticles();
   }
 
+  async reloadArticles(deletionSuccess: boolean) {
+    this.findAllArticles();
+  }
+
+  async findAllArticles() {
+    this.articles$ = await this.articlesService.findAllArticles();
+  }
 }
