@@ -11,8 +11,8 @@ export class ArticleNewComponent implements OnInit {
   constructor(private readonly formBuilder: FormBuilder) { }
 
   articleForm: FormGroup = this.formBuilder.group({
-    articleTitle: [''],
-    articleContent: [''],
+    title: [''],
+    content: [''],
   });
 
   ngOnInit() {
