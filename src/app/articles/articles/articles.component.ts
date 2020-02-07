@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ArticlesService } from '../articles.service';
 
 @Component({
   selector: 'app-articles',
@@ -9,10 +10,10 @@ import { HttpClient } from '@angular/common/http';
 export class ArticlesComponent implements OnInit {
   articles$ = null;
 
-  constructor(private readonly httpClient: HttpClient) { }
+  constructor(private readonly articlesService: ArticlesService) { }
 
-  ngOnInit() {
-    this.articles$ = this.httpClient.get<any[]>('http://localhost:3000/articles');
+  async ngOnInit() {
+    this.articles$ = await this.articlesService.findAllArticles();
   }
 
 }
