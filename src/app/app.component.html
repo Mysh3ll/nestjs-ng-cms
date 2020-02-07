@@ -14,6 +14,15 @@
         <li class="nav-item">
           <a [routerLink]="['articles']" routerLinkActive="active" class="nav-link" href="#">Articles</a>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Admin
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a [routerLink]="['admin/home']" routerLinkActive="active" class="dropdown-item" href="#">admin</a>
+            <a [routerLink]="['admin/article-new']" routerLinkActive="active" class="dropdown-item" href="#">create articles</a>
+          </div>
+        </li>
       </ul>
       <form class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
